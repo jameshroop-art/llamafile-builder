@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import sys, os, re
 from huggingface_hub import HfApi,login, logout
 api = HfApi()
