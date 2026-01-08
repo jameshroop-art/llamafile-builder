@@ -1,6 +1,6 @@
 # llamafile-builder
 
-A simple github actions script to build a llamafile from a given gguf file download url and uploads it to huggingface repo.
+A simple github actions script to build a llamafile from a given gguf file download url and uploads it to huggingface repo. This workflow runs on Debian 12 in a containerized environment.
 
 llamafile lets you distribute and run LLMs with a single file. [announcement blog post](https://hacks.mozilla.org/2023/11/introducing-llamafile/)
 
