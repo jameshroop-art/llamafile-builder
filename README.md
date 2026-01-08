@@ -16,11 +16,21 @@ llamafile lets you distribute and run LLMs with a single file. [announcement blo
 
 Add your huggingface token with write access to the repo as a actions secret with the name `HF_TOKEN`.
 
+## Platform Requirements
+
+**This tool is designed for Unix-like systems (Linux/macOS).** The scripts use Unix-specific features:
+- Bash shell commands (`#!/usr/bin/env python3` shebang)
+- Unix file permissions and executables
+- Linux package managers (`apt-get`)
+- Unix environment variables syntax
+
+**Windows users:** Use WSL (Windows Subsystem for Linux), Git Bash, or run via GitHub Actions (which runs on Linux).
+
 ## Usage
 
 ### Using GitHub Actions (Recommended)
 
-This is the primary way to use this repository:
+This is the primary way to use this repository and works from any platform:
 
 1. Head over to the actions tab.
 2. Select the action `Build llamafile` 
@@ -28,7 +38,7 @@ This is the primary way to use this repository:
 4. Click on `Run workflow` and wait for the action to complete.
 5. Check your huggingface repo for the llamafile.
 
-### Local Usage
+### Local Usage (Linux/macOS/WSL only)
 
 If you want to use the `hf.py` script locally to upload an existing llamafile:
 
@@ -45,7 +55,7 @@ If you want to use the `hf.py` script locally to upload an existing llamafile:
 3. Run the script:
    ```bash
    python3 hf.py <model_url> <huggingface_repo> <llamafile_path>
-   # Or, if the script has executable permissions:
+   # Or, if the script has executable permissions (Unix/Linux/macOS):
    ./hf.py <model_url> <huggingface_repo> <llamafile_path>
    ```
 
@@ -54,4 +64,6 @@ If you want to use the `hf.py` script locally to upload an existing llamafile:
    ./hf.py https://huggingface.co/TheBloke/Llama-2-7B-GGUF username/my-llamafile model.llamafile
    ```
 
-**Note:** The `.github/workflows/llamafile.yml` file is a GitHub Actions workflow configuration file and should not be executed directly. It is automatically run by GitHub Actions when you trigger the workflow through the GitHub UI.
+**Important Notes:**
+- The `.github/workflows/llamafile.yml` file is a GitHub Actions workflow configuration file and should **not** be executed directly. It is automatically run by GitHub Actions when you trigger the workflow through the GitHub UI.
+- For Windows users: Use `python hf.py` instead of `./hf.py` if running in WSL or Git Bash, or preferably use the GitHub Actions workflow.
