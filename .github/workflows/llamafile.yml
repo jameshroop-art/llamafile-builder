@@ -89,12 +89,15 @@ jobs:
 
             - name: Install dependencies
               run: |
-                python3 -m pip install --break-system-packages huggingface_hub
+                python3 -m venv /opt/venv
+                . /opt/venv/bin/activate
+                pip install huggingface_hub
 
             - name: Upload to HuggingFace
               env:
                 HF_TOKEN: ${{ secrets.HF_TOKEN }}
               run: |
+                . /opt/venv/bin/activate
                 cp llamafile-builder/hf.py llamafile/hf.py
                 cd llamafile
                 file_ext_removed_model_name=$(echo ${{ steps.model_name.outputs.model }} | sed 's/\.[^.]*$//')
