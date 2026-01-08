@@ -19,10 +19,10 @@ Add your huggingface token with write access to the repo as a actions secret wit
 ## Platform Requirements
 
 **This tool is designed for Unix-like systems (Linux/macOS).** The scripts use Unix-specific features:
-- Bash shell commands (`#!/usr/bin/env python3` shebang)
+- Python shebang line (`#!/usr/bin/env python3`) for direct script execution
 - Unix file permissions and executables
 - Linux package managers (`apt-get`)
-- Unix environment variables syntax
+- Bash shell commands and Unix environment variables syntax
 
 **Windows users:** Use WSL (Windows Subsystem for Linux), Git Bash, or run via GitHub Actions (which runs on Linux).
 
@@ -55,7 +55,8 @@ If you want to use the `hf.py` script locally to upload an existing llamafile:
 3. Run the script:
    ```bash
    python3 hf.py <model_url> <huggingface_repo> <llamafile_path>
-   # Or, if the script has executable permissions (Unix/Linux/macOS):
+   # Or make it executable and run directly (Unix/Linux/macOS/WSL):
+   chmod +x hf.py
    ./hf.py <model_url> <huggingface_repo> <llamafile_path>
    ```
 
@@ -66,4 +67,4 @@ If you want to use the `hf.py` script locally to upload an existing llamafile:
 
 **Important Notes:**
 - The `.github/workflows/llamafile.yml` file is a GitHub Actions workflow configuration file and should **not** be executed directly. It is automatically run by GitHub Actions when you trigger the workflow through the GitHub UI.
-- For Windows users: Use `python hf.py` instead of `./hf.py` if running in WSL or Git Bash, or preferably use the GitHub Actions workflow.
+- For native Windows (CMD/PowerShell): This script requires a Unix-like environment. Use WSL, Git Bash, or preferably use the GitHub Actions workflow.
