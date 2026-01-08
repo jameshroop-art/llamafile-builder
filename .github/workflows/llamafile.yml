@@ -21,7 +21,7 @@ jobs:
             - name: Install system dependencies
               run: |
                   apt-get update
-                  apt-get install -y wget curl sudo ca-certificates git python3 python3-pip python3-venv
+                  apt-get install -y wget curl ca-certificates git python3 python3-pip python3-venv
             
             - name: Download Llamafile latest
               run: |
@@ -47,7 +47,7 @@ jobs:
             - uses: actions/cache@v3
               with:
                 path: |
-                  ~/.cache/
+                  /root/.cache/
                 key: ${{ runner.os }}-cache
                 restore-keys: |
                   ${{ runner.os }}-
@@ -90,18 +90,16 @@ jobs:
             - name: Install dependencies
               run: |
                 python3 -m venv /opt/venv
-                . /opt/venv/bin/activate
-                pip install huggingface_hub
+                /opt/venv/bin/pip install huggingface_hub
 
             - name: Upload to HuggingFace
               env:
                 HF_TOKEN: ${{ secrets.HF_TOKEN }}
               run: |
-                . /opt/venv/bin/activate
                 cp llamafile-builder/hf.py llamafile/hf.py
                 cd llamafile
                 file_ext_removed_model_name=$(echo ${{ steps.model_name.outputs.model }} | sed 's/\.[^.]*$//')
-                python3 hf.py ${{ github.event.inputs.model_url }}  ${{ github.event.inputs.huggingface_repo }} "$file_ext_removed_model_name".llamafile
+                /opt/venv/bin/python3 hf.py ${{ github.event.inputs.model_url }}  ${{ github.event.inputs.huggingface_repo }} "$file_ext_removed_model_name".llamafile
 
 
             
